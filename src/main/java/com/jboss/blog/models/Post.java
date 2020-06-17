@@ -1,6 +1,5 @@
 package com.jboss.blog.models;
 
-import com.jboss.blog.models.audit.UserDateAudit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "posts", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }) })
-public class Post extends UserDateAudit {
-    private static final long serialVersionUID = 1L;
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

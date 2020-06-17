@@ -1,6 +1,5 @@
 package com.jboss.blog.models;
 
-import com.jboss.blog.models.audit.UserDateAudit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "comments")
-public class Comment extends UserDateAudit {
-    private static final long serialVersionUID = 1L;
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
