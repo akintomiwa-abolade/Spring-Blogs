@@ -23,12 +23,6 @@ public class PostService {
     public Post createPost(Post post){
         User user = userRepository.findById(post.getUser().getId()).orElse(null);
         Category cats = categoryRepository.findById(post.getCategory().getId()).orElse(null);
-//        if(user == null){
-//            user = new User();
-//        }
-//        if(cats == null){
-//            cats = new Category();
-//        }
         post.setUser(user);
         post.setCategory(cats);
         return postRepository.save(post);
@@ -40,11 +34,10 @@ public class PostService {
         return postRepository.findPostByUser(id);
     }
     public List<Post>fetchPosts(){
-        return postRepository.findAll();
+      return postRepository.findAll();
     }
     public List<Post>findByCategory(Long id){
         return postRepository.findByCategory(id);
     }
-
 
 }

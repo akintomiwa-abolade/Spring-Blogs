@@ -43,6 +43,10 @@ public class UserController {
     public ResponseEntity<Comment>userPosComment(@RequestBody Comment comment){
         return new ResponseEntity<>(commentService.createComment(comment), HttpStatus.OK);
     }
+    @GetMapping("/fetch-posts")
+    public List<Post>viewPosts(){
+        return postService.fetchPosts();
+    }
     @GetMapping("/fetch-post/{id}")
     public List<Post> userPosts(@PathVariable Long id) {
         return postService.findByUser(id);
