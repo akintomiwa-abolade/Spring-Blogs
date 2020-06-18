@@ -2,6 +2,8 @@ package com.jboss.blog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,12 +19,16 @@ import java.util.List;
 @Entity
 @Table(name = "posts", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }) })
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@ApiModel(description = "Details of Post Model")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Here is the unique ID for Post")
     private Long id;
+    @ApiModelProperty(notes = "Here is the field for blog title")
     private String title;
+    @ApiModelProperty(notes = "This is the field for the blog content.")
     private String body;
 
     @JsonIgnore
