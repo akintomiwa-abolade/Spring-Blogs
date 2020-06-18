@@ -1,7 +1,11 @@
 package com.jboss.blog.services;
 
+import com.jboss.blog.models.Category;
 import com.jboss.blog.models.Post;
+import com.jboss.blog.models.User;
+import com.jboss.blog.repository.CategoryRepository;
 import com.jboss.blog.repository.PostRepository;
+import com.jboss.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +15,29 @@ import java.util.List;
 public class PostService {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public Post createPost(Post post){
+        User user = userRepository.findById(post.getUser().getId()).orElse(null);
+        Category cats = categoryRepository.findById(post.getCategory().getId()).orElse(null);
+//        if(user == null){
+//            user = new User();
+//        }
+//        if(cats == null){
+//            cats = new Category();
+//        }
+        post.setUser(user);
+        post.setCategory(cats);
         return postRepository.save(post);
     }
     public Post fetchPost(Long id){
         return postRepository.findById(id).orElse(null);
     }
     public List<Post>findByUser(Long id){
-        return postRepository.findByUser(id);
+        return postRepository.findPostByUser(id);
     }
     public List<Post>fetchPosts(){
         return postRepository.findAll();
