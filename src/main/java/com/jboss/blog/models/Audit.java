@@ -24,10 +24,10 @@ public abstract class Audit implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
-    private transient Date createdAt;
+    private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
-    private transient Date updatedAt;
+    private Date updatedAt;
 }

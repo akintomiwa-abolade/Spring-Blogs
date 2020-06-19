@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,19 +46,20 @@ public class UserController {
 
     @PostMapping("/create-post")
     @ApiOperation("User create a blog post")
-    public Post userSubmitPost(@RequestBody Post post){
+    public Post userSubmitPost(@Valid @RequestBody Post post){
         return postService.createPost(post);
     }
 
     @PostMapping("/post-comment")
     @ApiOperation("User create comment on a blog post")
-    public ResponseEntity<Comment>userPosComment(@RequestBody Comment comment){
+    public ResponseEntity<Comment>userPosComment(@Valid @RequestBody Comment comment){
         return new ResponseEntity<>(commentService.createComment(comment), HttpStatus.OK);
     }
     @GetMapping("/fetch-posts")
     public List<Post>viewPosts(){
         return postService.fetchPosts();
     }
+
     @GetMapping("/fetch-user-posts/{id}")
     public List<Post> userPosts(@PathVariable Long id) {
         return postService.findByUser(id);
