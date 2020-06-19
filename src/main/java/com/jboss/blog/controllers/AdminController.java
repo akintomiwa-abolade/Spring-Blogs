@@ -6,12 +6,10 @@ import com.jboss.blog.repository.RoleRepository;
 import com.jboss.blog.services.AdminService;
 import com.jboss.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.GeneratedValue;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,17 +23,17 @@ public class AdminController {
     private RoleRepository roleRepository;
 
     @PostMapping("/add-role")
-    public Role createRoles(Role role){
+    public Role createRoles(@Valid @RequestBody Role role){
         return adminService.createRole(role);
     }
 
     @PostMapping("/register-admin")
-    public User addAdmin(User user){
+    public User addAdmin(@Valid @RequestBody User user){
         return userService.createAdminAccount(user);
     }
 
     @GetMapping("/view-users/{id}")
-    public List<User> viewUsers(Long id){
+    public List<User> viewUsers(@PathVariable Long id){
         return userService.findUsers(id);
     }
 }
