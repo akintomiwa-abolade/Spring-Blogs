@@ -27,13 +27,18 @@ public class UserController {
     @Autowired
     private CommentService commentService;
 
+    @GetMapping("/")
+    public String welcome(){
+        return "index";
+    }
+
     @PostMapping("/create-account")
     @ApiOperation("User create an Account")
     public User signUp(@RequestBody User user){
         String password = user.getPassword();
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
         user.setPassword(encodedPassword);
-        return userService.createAccount(user);
+        return userService.createUserAccount(user);
     }
 
     @PostMapping("/create-post")
@@ -51,7 +56,7 @@ public class UserController {
     public List<Post>viewPosts(){
         return postService.fetchPosts();
     }
-    @GetMapping("/fetch-post/{id}")
+    @GetMapping("/fetch-user-posts/{id}")
     public List<Post> userPosts(@PathVariable Long id) {
         return postService.findByUser(id);
     }

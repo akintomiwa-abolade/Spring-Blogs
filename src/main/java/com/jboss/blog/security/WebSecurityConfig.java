@@ -23,13 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
     @Autowired
     private MyUserDetailsService myUserDetailsService;
-
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
@@ -39,12 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtAuthenticationEntryPoint jwtAuthenticationEntryPointBean() throws Exception{
         return new JwtAuthenticationEntryPoint();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -54,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/api/v1/authenticate","/api/v1/register", "/api/v1/login", "/api/v1/register/admin", "/api/v1/roles").permitAll()
+                .authorizeRequests().antMatchers("/api/v1/blog/authenticate","/api/v1/blog/create-account", "/api/v1/blog/login", "/api/v1/blog/register-admin", "/api/v1/blog/add-role").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

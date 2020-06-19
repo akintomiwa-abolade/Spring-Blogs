@@ -44,5 +44,4 @@ public class Post extends Audit{
     @JoinColumn(name = "user_id")
     private User user;
 
-
 }

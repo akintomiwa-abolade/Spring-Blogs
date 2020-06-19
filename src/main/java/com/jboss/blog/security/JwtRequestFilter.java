@@ -16,11 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//import com.logistics.checklist.security.JwtToken;
-
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;

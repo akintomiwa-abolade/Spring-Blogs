@@ -37,6 +37,8 @@ public class User extends Audit {
     private String password;
     @ApiModelProperty(notes = "This is the field for User phone.")
     private String phone;
+    @ApiModelProperty(notes = "This field determine Users activeness")
+    private Long status;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -45,4 +47,9 @@ public class User extends Audit {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
 }
