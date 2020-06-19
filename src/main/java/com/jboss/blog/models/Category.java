@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "category")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @ApiModel(description = "Details of Category Model")
-public class Category {
+public class Category extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "Here is the unique ID for Category")

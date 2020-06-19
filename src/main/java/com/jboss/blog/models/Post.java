@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "posts", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }) })
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @ApiModel(description = "Details of Post Model")
-public class Post {
+public class Post extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

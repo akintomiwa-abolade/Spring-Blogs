@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Table(name = "comments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @ApiModel(description = "Details of Comment Model")
-public class Comment implements Serializable {
+public class Comment extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

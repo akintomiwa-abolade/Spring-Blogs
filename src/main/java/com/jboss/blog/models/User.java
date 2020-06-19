@@ -21,7 +21,7 @@ import java.util.List;
         @UniqueConstraint(columnNames = { "email" }) })
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @ApiModel(description = "Details of User Model")
-public class User {
+public class User extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
