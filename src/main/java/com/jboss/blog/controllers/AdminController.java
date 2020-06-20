@@ -6,6 +6,7 @@ import com.jboss.blog.repository.RoleRepository;
 import com.jboss.blog.services.AdminService;
 import com.jboss.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.GeneratedValue;
@@ -23,16 +24,19 @@ public class AdminController {
     private RoleRepository roleRepository;
 
     @PostMapping("/add-role")
+    @PreAuthorize("hasRole(3)")
     public Role createRoles(@Valid @RequestBody Role role){
         return adminService.createRole(role);
     }
 
     @PostMapping("/register-admin")
+    @PreAuthorize("hasRole(3)")
     public User addAdmin(@Valid @RequestBody User user){
         return userService.createAdminAccount(user);
     }
 
     @GetMapping("/view-users/{id}")
+    @PreAuthorize("hasRole(3)")
     public List<User> viewUsers(@PathVariable Long id){
         return userService.findUsers(id);
     }

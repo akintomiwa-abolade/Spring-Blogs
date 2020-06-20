@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -46,21 +47,25 @@ public class UserController {
 
     @PostMapping("/create-post")
     @ApiOperation("User create a blog post")
+    @PreAuthorize("hasRole(1)")
     public Post userSubmitPost(@Valid @RequestBody Post post){
         return postService.createPost(post);
     }
 
     @PostMapping("/post-comment")
     @ApiOperation("User create comment on a blog post")
+    @PreAuthorize("hasRole(1)")
     public ResponseEntity<Comment>userPosComment(@Valid @RequestBody Comment comment){
         return new ResponseEntity<>(commentService.createComment(comment), HttpStatus.OK);
     }
     @GetMapping("/fetch-posts")
+    @PreAuthorize("hasRole(1)")
     public List<Post>viewPosts(){
         return postService.fetchPosts();
     }
 
     @GetMapping("/fetch-user-posts/{id}")
+    @PreAuthorize("hasRole(1)")
     public List<Post> userPosts(@PathVariable Long id) {
         return postService.findByUser(id);
     }

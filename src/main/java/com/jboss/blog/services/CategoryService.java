@@ -3,6 +3,8 @@ package com.jboss.blog.services;
 import com.jboss.blog.models.Category;
 import com.jboss.blog.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class CategoryService {
     public Category fetchCategory(Long id){
         return categoryRepository.findById(id).orElse(null);
     }
-    public Category editCategory(Category category){
-        Category defaultCats = categoryRepository.findById(category.getId()).orElse(null);
+    public Category editCategory(Long id, Category category){
+        Category defaultCats = categoryRepository.findById(id).orElse(null);
         defaultCats.setCatName(category.getCatName());
         defaultCats.setCatDesc(category.getCatDesc());
         return categoryRepository.save(defaultCats);

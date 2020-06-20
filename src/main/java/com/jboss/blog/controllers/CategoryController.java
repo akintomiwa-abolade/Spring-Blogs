@@ -36,8 +36,8 @@ public class CategoryController {
 
     @PutMapping("/update-category")
     @ApiOperation("Update a Category")
-    public Category updateCategory(@RequestBody Category category){
-        return categoryService.editCategory(category);
+    public Category updateCategory(@PathVariable Long id, @RequestBody Category category){
+        return categoryService.editCategory(id, category);
     }
 
     @DeleteMapping("/delete-category/{id}")
