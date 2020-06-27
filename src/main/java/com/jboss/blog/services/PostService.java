@@ -31,7 +31,8 @@ public class PostService {
         return postRepository.findById(id).orElse(null);
     }
     public List<Post>findByUser(Long id){
-        return postRepository.findPostByUser(id);
+        User user = userRepository.findById(id).orElse(null);
+        return postRepository.findPostByUser(user.getId());
     }
     public List<Post>fetchPosts(){
       return postRepository.findAll();
