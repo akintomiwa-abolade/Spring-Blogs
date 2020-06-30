@@ -1,9 +1,12 @@
 package com.jboss.blog.controllers;
 
+import com.jboss.blog.models.User;
 import com.jboss.blog.payloads.JwtRequest;
 import com.jboss.blog.payloads.JwtResponse;
 import com.jboss.blog.security.JwtToken;
 import com.jboss.blog.services.MyUserDetailsService;
+import com.jboss.blog.services.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +14,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +29,9 @@ public class AuthController {
     private JwtToken jwtToken;
     @Autowired
     private MyUserDetailsService myUserDetailsService;
+
+    @Autowired
+    private UserService userService;
     
     // login new user
     @PostMapping("/login")
@@ -37,6 +45,16 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
 
     }
+
+    @PostMapping("/register")
+    @ApiOperation("User create an Account")
+    public User signUp(@RequestBody User user){
+        String password = user.getPassword();
+        String encodedPassword = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(encodedPassword);
+        return userService.createUserAccount(user);
+    }
+
 
     private void authenticate(String username, String password) throws Exception {
         try {

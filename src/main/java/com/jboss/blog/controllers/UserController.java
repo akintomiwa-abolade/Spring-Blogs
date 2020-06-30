@@ -36,15 +36,6 @@ public class UserController {
         return "index";
     }
 
-    @PostMapping("/create-account")
-    @ApiOperation("User create an Account")
-    public User signUp(@RequestBody User user){
-        String password = user.getPassword();
-        String encodedPassword = new BCryptPasswordEncoder().encode(password);
-        user.setPassword(encodedPassword);
-        return userService.createUserAccount(user);
-    }
-
     @PostMapping("/create-post")
     @ApiOperation("User create a blog post")
     @PreAuthorize("hasRole(1)")

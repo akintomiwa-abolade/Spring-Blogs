@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -41,10 +42,10 @@ public class UserService {
     public List<User>findUsers(Long roleId){
         return userRepository.findUserByRole(roleId);
     }
-//    public User deactivateUser(Long id){
-//        User existingUser = userRepository.findById(id).orElse(null);
-//        existingUser.setRole();
-//        return userRepository.save(existingUser);
-//    }
+    public User deactivateUser(Long id){
+        User existingUser = userRepository.findById(id).orElse(null);
+        existingUser.setStatus(0L);
+        return userRepository.save(existingUser);
+    }
 
 }

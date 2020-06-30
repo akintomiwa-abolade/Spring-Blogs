@@ -40,4 +40,10 @@ public class AdminController {
     public List<User> viewUsers(@PathVariable Long id){
         return userService.findUsers(id);
     }
+
+    @PutMapping("/deactivate/{id}/user")
+    @PreAuthorize("hasRole(3)")
+    public User deactivateUser(@PathVariable Long id){
+        return userService.deactivateUser(id);
+    }
 }
