@@ -3,6 +3,7 @@ package com.jboss.blog.controllers;
 import com.jboss.blog.models.User;
 import com.jboss.blog.payloads.JwtRequest;
 import com.jboss.blog.payloads.JwtResponse;
+import com.jboss.blog.repository.UserRepository;
 import com.jboss.blog.security.JwtToken;
 import com.jboss.blog.services.MyUserDetailsService;
 import com.jboss.blog.services.UserService;
@@ -18,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1")
@@ -32,6 +35,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
     
     // login new user
     @PostMapping("/login")
@@ -41,8 +47,11 @@ public class AuthController {
         final UserDetails userDetails = myUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
+        Optional<User> userData = userRepository.findByUsername(authenticationRequest.getUsername());
+
         final String token = jwtToken.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(userData.get().getId(), userData.get().getFullname(), userData.get().getEmail(), userData.get().getUsername(),
+                userData.get().getPhone(), userData.get().getPassword(), userData.get().getStatus(), token));
 
     }
 
