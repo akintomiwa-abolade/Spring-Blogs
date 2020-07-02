@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/blog")
+@RequestMapping("/api/v1")
 public class AdminController {
     @Autowired
     private AdminService adminService;

@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/blog")
+@RequestMapping("/api/v1")
 @Api("General Operation pertaining to Users")
 public class UserController {
     @Autowired
