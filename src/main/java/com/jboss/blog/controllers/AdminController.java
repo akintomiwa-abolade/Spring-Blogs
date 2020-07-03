@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8091")
 @RestController
 @RequestMapping("/api/v1")
 public class AdminController {
