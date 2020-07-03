@@ -47,5 +47,14 @@ public class UserService {
         existingUser.setStatus(0L);
         return userRepository.save(existingUser);
     }
+    public User viewUser(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
+    public User updateAccount(Long id, User user){
+        User realUser = userRepository.findById(id).orElse(null);
+        realUser.setFullname(user.getFullname());
+        realUser.setPhone(user.getPhone());
+        return userRepository.save(realUser);
+    }
 
 }

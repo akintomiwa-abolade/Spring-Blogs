@@ -60,4 +60,16 @@ public class UserController {
     public List<Post> userPosts(@PathVariable Long id) {
         return postService.findByUser(id);
     }
+
+    @GetMapping("/edit-user-info/{id}")
+    @PreAuthorize("hasRole(1)")
+    public User editUser(@PathVariable Long id){
+        return userService.viewUser(id);
+    }
+
+    @PutMapping("/update-account")
+    @PreAuthorize("hasRole(1)")
+    public User updateAccount(@PathVariable Long id, @RequestBody User user){
+        return userService.updateAccount(id, user);
+    }
 }
