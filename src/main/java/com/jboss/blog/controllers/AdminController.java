@@ -20,8 +20,6 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleRepository roleRepository;
 
     @PostMapping("/add-role")
     @PreAuthorize("hasRole(3)")
@@ -45,5 +43,11 @@ public class AdminController {
     @PreAuthorize("hasRole(3)")
     public User deactivateUser(@PathVariable Long id){
         return userService.deactivateUser(id);
+    }4
+
+    @DeleteMapping("/delete-user/{id}")
+    @PreAuthorize("hasRole(3)")
+    public String deleteUser(@PathVariable Long id){
+        return userService.deleteUser(id);
     }
 }

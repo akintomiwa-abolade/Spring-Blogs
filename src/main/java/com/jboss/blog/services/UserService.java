@@ -56,5 +56,9 @@ public class UserService {
         realUser.setPhone(user.getPhone());
         return userRepository.save(realUser);
     }
+    public String deleteUser(Long id){
+        userRepository.deleteById(id);
+        return "User with ID " + id + " Deleted Successfully";
+    }
 
 }
