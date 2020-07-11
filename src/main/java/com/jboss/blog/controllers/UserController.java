@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/post-comment")
-    @ApiOperation("User create comment on a blog post")
+    @ApiOperation("User create comment on a blog post.")
     @PreAuthorize("hasRole(1)")
     public ResponseEntity<Comment>userPosComment(@Valid @RequestBody Comment comment){
         return new ResponseEntity<>(commentService.createComment(comment), HttpStatus.OK);
