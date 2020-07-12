@@ -30,9 +30,7 @@ public class MyUserDetailsService implements UserDetailsService{
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Long role) {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
 		list.add(new SimpleGrantedAuthority(ROLE_PREFIX +role));
-
 		return list;
 	}
 }
