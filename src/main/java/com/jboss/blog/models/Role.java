@@ -25,5 +25,4 @@ public class Role extends Audit {
     @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users;
-
 }
