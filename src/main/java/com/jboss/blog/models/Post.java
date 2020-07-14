@@ -43,5 +43,4 @@ public class Post extends Audit{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 }
