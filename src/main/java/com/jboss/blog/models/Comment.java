@@ -17,15 +17,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "comments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@ApiModel(description = "Details of Comment Model")
+@ApiModel(description = "Details of Comment Model.")
 public class Comment extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(notes = "Here is the unique ID for Comment")
+    @ApiModelProperty(notes = "Here is the unique ID for Comment.")
     private Long id;
 
-    @ApiModelProperty(notes = "Here is the field comment made on Post")
+    @ApiModelProperty(notes = "Here is the field comment made on Post.")
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
