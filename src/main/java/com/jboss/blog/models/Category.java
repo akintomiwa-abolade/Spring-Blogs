@@ -21,10 +21,10 @@ import java.util.List;
 public class Category extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(notes = "Here is the unique ID for Category")
+    @ApiModelProperty(notes = "Here is the unique ID for Category.")
     private Long id;
 
-    @ApiModelProperty(notes = "This is the field for category name")
+    @ApiModelProperty(notes = "This is the field for category name.")
     @Column(name = "cat_name")
     private String catName;
 
