@@ -56,7 +56,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @ApiOperation("User create an Account")
-    public ResponseEntity<User> signUp(@RequestBody User user){
+    public User signUp(@RequestBody User user){
         String password = user.getPassword();
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
         user.setPassword(encodedPassword);
