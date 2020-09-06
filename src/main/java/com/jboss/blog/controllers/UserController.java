@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping("/")
     public String welcome(){
-        return "index";
+        return "<h1>Hello JBoss</h1>";
     }
 
     @PostMapping("/create-post")
